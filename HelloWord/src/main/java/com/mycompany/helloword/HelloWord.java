@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author hudsonteixeira
  */
 public class HelloWord {
-    public int [] convertirMatrixToArray(int[][] matrix){
+    static int [] convertirMatrixToArray(int[][] matrix){
     int newArray[] = new int[matrix.length*matrix[0].length];
     for(int i = 0; i < matrix.length; i++) {
         int[] row = matrix[i];
@@ -52,5 +52,7 @@ public class HelloWord {
     public static void main(String[] args) {
         PmgReader pmgReader = new PmgReader();
         int[][] data2D = pmgReader.pmgread("./ImagesTestPGM/brain.pgm");
+        int[] arrayImage = convertirMatrixToArray(data2D);
+        printHistogram(arrayImage,256);
     }
 }
