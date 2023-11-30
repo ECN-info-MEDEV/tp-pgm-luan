@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class PmgReader {
 
-public void pmgread(String filePath){
+public int[][] pmgread(String filePath){
     try{
         InputStream fileInputStream = new FileInputStream(filePath);
         Scanner scan = new Scanner(fileInputStream);
@@ -50,8 +50,10 @@ public void pmgread(String filePath){
              }
              System.out.println();
          }
+         return data2D;
     } catch (Exception e) {    
         System.out.println("error ");
+        return null;
     }
 }
 }

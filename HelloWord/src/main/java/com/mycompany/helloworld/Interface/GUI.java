@@ -43,7 +43,8 @@ public class GUI extends javax.swing.JFrame {
                 if (result == JFileChooser.APPROVE_OPTION) {
                     // Obtener el archivo seleccionado
                     File selectedFile = fileChooser.getSelectedFile();
-
+                    PmgReader pmgReader = new PmgReader();
+                    pmgReader.pmgread(selectedFile.getAbsolutePath());
                     // Aquí puedes hacer lo que necesites con el archivo seleccionado
                     // Por ejemplo, imprimir la ruta del archivo seleccionado
                     System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
