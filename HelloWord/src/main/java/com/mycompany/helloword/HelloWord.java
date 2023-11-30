@@ -50,9 +50,7 @@ public class HelloWord {
     }
   }
     public static void main(String[] args) {
-        PmgReader pmgReader = new PmgReader();
-        int[][] data2D = pmgReader.pmgread("./ImagesTestPGM/brain.pgm");
-        int[] arrayImage = convertirMatrixToArray(data2D);
-        printHistogram(arrayImage,256);
+        
+        
     }
 }

@@ -45,6 +45,7 @@ public class GUI extends javax.swing.JFrame {
                     File selectedFile = fileChooser.getSelectedFile();
                     PmgReader pmgReader = new PmgReader();
                     pmgReader.pmgread(selectedFile.getAbsolutePath());
+                    pmgReader.histogramme(jPanel1);
                     // Aquí puedes hacer lo que necesites con el archivo seleccionado
                     // Por ejemplo, imprimir la ruta del archivo seleccionado
                     System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
