@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  *
  * @author felipelavila
  */
-class Graph extends JPanel {
+public class Graph extends JPanel {
 
         protected static final int MIN_BAR_WIDTH = 4;
         private Map<Integer, Integer> mapHistory;

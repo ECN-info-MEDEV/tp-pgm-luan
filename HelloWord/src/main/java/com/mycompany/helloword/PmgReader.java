@@ -22,6 +22,15 @@ public class PmgReader {
     private int[][] img;
     private int picWidth;
     private int picHeight;
+    private Graph graphSaved;
+
+    public Graph getGraphSaved() {
+        return graphSaved;
+    }
+
+    public void setGraphSaved(Graph graphSaved) {
+        this.graphSaved = graphSaved;
+    }
 
     public void pmgread(String filePath){
         try{
@@ -77,7 +86,7 @@ public class PmgReader {
        // Ajustar el tamaño del frame automáticamente// Definir acción al cerrar la ventana
         panel.setVisible(true);
         SwingUtilities.invokeLater(() -> {
-            graph.save(); // Llama a save() una vez que el gráfico esté completamente dibujado
+            this.graphSaved = graph;
         });
     }
     
