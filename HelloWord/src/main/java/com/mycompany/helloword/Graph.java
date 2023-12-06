@@ -41,7 +41,7 @@ class Graph extends JPanel {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.setColor(Color.DARK_GRAY);
                 g2d.drawRect(xOffset, yOffset, width, height);
-                int barWidth = Math.max(2,
+                int barWidth = Math.max(MIN_BAR_WIDTH,
                         (int) Math.floor((float) width
                         / (float) mapHistory.size()));
                 System.out.println("width = " + width + "; size = "
@@ -54,10 +54,11 @@ class Graph extends JPanel {
                 int xPos = xOffset;
                 for (Integer key : mapHistory.keySet()) {
                     int value = mapHistory.get(key);
-                    int barHeight = Math.round(((float) value/ (float) maxValue) * height);
+                    int barHeight = Math.round(((float) value
+                            / (float) maxValue) * height);
                     g2d.setColor(new Color(key, key, key));
                     int yPos = height + yOffset - barHeight;
-//Rectangle bar = new Rectangle(xPos, yPos, barWidth, barHeight);
+                    //Rectangle bar = new Rectangle(xPos, yPos, barWidth, barHeight);
                     Rectangle2D bar = new Rectangle2D.Float(
                             xPos, yPos, barWidth, barHeight);
                     g2d.fill(bar);
