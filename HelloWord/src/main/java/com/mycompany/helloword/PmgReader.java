@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author hudsonteixeira
@@ -48,8 +49,6 @@ public class PmgReader {
                  
              }
              
-             
-             
         } catch (Exception e) {    
             System.out.println("error ");
         }
@@ -73,9 +72,14 @@ public class PmgReader {
          }
 
         panel.setLayout(new BorderLayout());
-        panel.add(new JScrollPane(new Graph(mapHistory))); // Suponiendo que Graph recibe el mapa y muestra el histograma
+        Graph graph = new Graph(mapHistory);
+        panel.add(new JScrollPane(graph)); // Suponiendo que Graph recibe el mapa y muestra el histograma
        // Ajustar el tamaño del frame automáticamente// Definir acción al cerrar la ventana
         panel.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            graph.save(); // Llama a save() una vez que el gráfico esté completamente dibujado
+        });
     }
+    
 }
 

@@ -26,7 +26,7 @@ public class GUI extends javax.swing.JFrame {
         
 
         // Asegúrate de llamar a revalidate() y repaint() para actualizar la interfaz gráfica
-        
+        PmgReader pmgReader = new PmgReader();
         JButton selectFileButton = new JButton("Seleccionar archivo PGM");
         selectFileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -43,7 +43,7 @@ public class GUI extends javax.swing.JFrame {
                 if (result == JFileChooser.APPROVE_OPTION) {
                     // Obtener el archivo seleccionado
                     File selectedFile = fileChooser.getSelectedFile();
-                    PmgReader pmgReader = new PmgReader();
+                    
                     pmgReader.pmgread(selectedFile.getAbsolutePath());
                     pmgReader.histogramme(jPanel1);
                     // Aquí puedes hacer lo que necesites con el archivo seleccionado
@@ -51,6 +51,12 @@ public class GUI extends javax.swing.JFrame {
                     System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
                 }
                 }
+         });
+        JButton saveButton = new JButton("Save file");
+        selectFileButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               
+            }
          });
        jPanel1.setLayout(new FlowLayout()); // Puedes utilizar otro LayoutManager si prefieres
        jPanel1.add(selectFileButton);

@@ -9,7 +9,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -67,6 +71,25 @@ class Graph extends JPanel {
                     xPos += barWidth;
                 }
                 g2d.dispose();
+                
+            }
+        }
+        public void save()
+        {
+            int panelWidth = this.getWidth();
+            int panelHeight = this.getHeight();
+
+            if (panelWidth > 0 && panelHeight > 0) {
+                BufferedImage bImg = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+                Graphics2D cg = bImg.createGraphics();
+                this.paintAll(cg);
+                try {
+                    if (ImageIO.write(bImg, "pgm", new File("./outputfinal.pgm"))) {
+                        System.out.println("-- saved");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
