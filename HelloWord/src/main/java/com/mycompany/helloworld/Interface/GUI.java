@@ -4,6 +4,7 @@
  */
 package com.mycompany.helloworld.Interface;
 import com.mycompany.helloword.PmgReader;
+import com.mycompany.helloword.Graph;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
@@ -46,20 +47,28 @@ public class GUI extends javax.swing.JFrame {
                     
                     pmgReader.pmgread(selectedFile.getAbsolutePath());
                     pmgReader.histogramme(jPanel1);
+                    
                     // Aquí puedes hacer lo que necesites con el archivo seleccionado
                     // Por ejemplo, imprimir la ruta del archivo seleccionado
                     System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
                 }
                 }
          });
-        JButton saveButton = new JButton("Save file");
-        selectFileButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               
-            }
-         });
        jPanel1.setLayout(new FlowLayout()); // Puedes utilizar otro LayoutManager si prefieres
        jPanel1.add(selectFileButton);
+       jPanel1.revalidate();
+       jPanel1.repaint();
+       
+       JButton saveButton = new JButton("Save file");
+       SwingUtilities.invokeLater(() -> {
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+              System.out.println("listened to event");
+              ((Graph)pmgReader.getGraphSaved()).save();
+            }
+         });
+        });
+       jPanel1.add(saveButton);
        jPanel1.revalidate();
        jPanel1.repaint();
     }
