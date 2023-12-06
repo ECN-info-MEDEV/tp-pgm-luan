@@ -84,7 +84,7 @@ class Graph extends JPanel {
                 Graphics2D cg = bImg.createGraphics();
                 this.paintAll(cg);
                 try {
-                    if (ImageIO.write(bImg, "pgm", new File("./outputfinal.pgm"))) {
+                    if (ImageIO.write(bImg, "pnm", new File("./outputfinal.pgm"))) {
                         System.out.println("-- saved");
                     }
                 } catch (IOException e) {
