@@ -36,6 +36,33 @@ public class PmgReader {
     private int picHeight;
     private Graph graphSaved;
 
+    public int getPicWidth() {
+        return picWidth;
+    }
+
+    public void setPicWidth(int picWidth) {
+        this.picWidth = picWidth;
+    }
+
+    public int getPicHeight() {
+        return picHeight;
+    }
+
+    public void setPicHeight(int picHeight) {
+        this.picHeight = picHeight;
+    }
+    
+    
+    public PmgReader(){
+    }
+    public PmgReader(int[][] img, int[][] imgBinaire, int picWidth, int picHeight, Graph graphSaved) {
+        this.img = img;
+        this.imgBinaire = imgBinaire;
+        this.picWidth = picWidth;
+        this.picHeight = picHeight;
+        this.graphSaved = graphSaved;
+    }
+
     public int[][] getImg() {
         return img;
     }
@@ -52,6 +79,15 @@ public class PmgReader {
     public void setGraphSaved(Graph graphSaved) {
         this.graphSaved = graphSaved;
     }
+
+    public int[][] getImgBinaire() {
+        return imgBinaire;
+    }
+
+    public void setImgBinaire(int[][] imgBinaire) {
+        this.imgBinaire = imgBinaire;
+    }
+    
 
     public void pmgread(String filePath) {
         try {
