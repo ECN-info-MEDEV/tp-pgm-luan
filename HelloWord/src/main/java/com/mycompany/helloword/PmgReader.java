@@ -11,6 +11,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 import javax.swing.JFrame;
+import java.awt.Color;
+import javax.imageio.ImageIO;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
@@ -132,7 +138,22 @@ public class PmgReader {
         }
         return imageVerifier;
     }
-
+     public void saveImage(int[][] img2){
+        BufferedImage image = new BufferedImage(this.picWidth, this.picHeight, BufferedImage.TYPE_BYTE_GRAY);
+        try {
+            for(int i=0; i<this.img.length; i++) {
+                for(int j=0; j<this.img[i].length; j++) {
+                    int a = img[i][j];
+                    Color newColor = new Color(a,a,a);
+                    image.setRGB(j,i,newColor.getRGB());
+                }
+            }
+            File output = new File("GrayScale.jpg");
+            ImageIO.write(image, "jpg", output);
+        } catch(Exception e){
+            System.out.print("Pas Sauvegardé  "+e.getMessage());
+        }
+    } 
       
 
 }
