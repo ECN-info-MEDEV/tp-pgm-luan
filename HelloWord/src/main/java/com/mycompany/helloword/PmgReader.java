@@ -14,7 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 /**
  *
  * @author hudsonteixeira
@@ -27,6 +29,15 @@ public class PmgReader {
     private int picHeight;
     private Graph graphSaved;
 
+    public int[][] getImg() {
+        return img;
+    }
+
+    public void setImg(int[][] img) {
+        this.img = img;
+    }
+
+    
     public Graph getGraphSaved() {
         return graphSaved;
     }
@@ -96,14 +107,32 @@ public class PmgReader {
     public static int[][] transformMatriz(int[][] matriz, int x) { 
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
-                if (matriz[i][j] < x) {
+                if (matriz[i][j] <= x) {
                     matriz[i][j] = 0;
                 } else if (matriz[i][j] > x) {
-                    matriz[i][j] = 1;
+                    matriz[i][j] = 255;
                 }
             }
         }
         return matriz;
     }
+    
+      public boolean verifySameImage(int[][] img2){
+        boolean imageVerifier = true;
+        if(this.picWidth != img2[0].length || this.picHeight != img2.length){
+            imageVerifier = false;
+        } else{
+            for (int i = 0; i < picHeight; i++) {
+                for (int j = 0; j < picWidth; j++) {
+                    if(this.img[i][j] != img2[i][j]){
+                        imageVerifier = false;
+                    }
+                }
+            }
+        }
+        return imageVerifier;
+    }
+
+      
 
 }
