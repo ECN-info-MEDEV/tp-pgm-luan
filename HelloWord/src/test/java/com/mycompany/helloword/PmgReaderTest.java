@@ -68,14 +68,19 @@ public class PmgReaderTest {
     public void testVerifySameImage() {
         System.out.println("verifySameImage");
         int[][] img2 = {{160,60,53},{97,151,99},{67,36,77}};
+        int[][] img3 = {{0,60,53},{97,151,99},{67,36,77}};
         PmgReader instance = new PmgReader();
         instance.setPicWidth(3);
         instance.setPicHeight(3);
         int[][] testImg = {{160,60,53},{97,151,99},{67,36,77}};
         instance.setImg(testImg);
         boolean expResult = true;
+        boolean expResult2 = false;
         boolean result = instance.verifySameImage(img2);
+        boolean result2 = instance.verifySameImage(img3);
         assertEquals(expResult, result);
+        assertEquals(expResult2, result2);
+
     }
 
     /**
