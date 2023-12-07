@@ -110,17 +110,16 @@ public class PmgReader {
     }
 
     //seuillage
-    public static int[][] transformMatriz(int[][] matriz, int x) { 
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                if (matriz[i][j] <= x) {
-                    matriz[i][j] = 0;
-                } else if (matriz[i][j] > x) {
-                    matriz[i][j] = 255;
+    public void transformMatriz(int x) { 
+        for (int i = 0; i < this.img.length; i++) {
+            for (int j = 0; j < this.img[i].length; j++) {
+                if (this.img[i][j] <= x) {
+                    this.img[i][j] = 0;
+                } else if (this.img[i][j] > x) {
+                    this.img[i][j] = 255;
                 }
             }
         }
-        return matriz;
     }
     
       public boolean verifySameImage(int[][] img2){
