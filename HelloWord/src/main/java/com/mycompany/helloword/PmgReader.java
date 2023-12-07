@@ -31,6 +31,7 @@ import java.io.IOException;
 public class PmgReader {
 
     private int[][] img;
+    private int[][] imgBinaire;
     private int picWidth;
     private int picHeight;
     private Graph graphSaved;
@@ -111,12 +112,13 @@ public class PmgReader {
 
     //seuillage
     public void transformMatriz(int x) { 
+        imgBinaire = new int[picHeight][picWidth];
         for (int i = 0; i < this.img.length; i++) {
             for (int j = 0; j < this.img[i].length; j++) {
                 if (this.img[i][j] <= x) {
-                    this.img[i][j] = 0;
+                    this.imgBinaire[i][j] = 0;
                 } else if (this.img[i][j] > x) {
-                    this.img[i][j] = 255;
+                    this.imgBinaire[i][j] = 255;
                 }
             }
         }
@@ -137,18 +139,20 @@ public class PmgReader {
         }
         return imageVerifier;
     }
-     public void saveImage(int[][] img2){
+     public void saveImage(){
+         System.out.print("listen to imageSave");
         BufferedImage image = new BufferedImage(this.picWidth, this.picHeight, BufferedImage.TYPE_BYTE_GRAY);
         try {
-            for(int i=0; i<this.img.length; i++) {
-                for(int j=0; j<this.img[i].length; j++) {
-                    int a = img[i][j];
+            for(int i=0; i<this.imgBinaire.length; i++) {
+                for(int j=0; j<this.imgBinaire[i].length; j++) {
+                    int a = imgBinaire[i][j];
                     Color newColor = new Color(a,a,a);
                     image.setRGB(j,i,newColor.getRGB());
                 }
             }
-            File output = new File("GrayScale.jpg");
+            File output = new File("./GrayScale.jpg");
             ImageIO.write(image, "jpg", output);
+             System.out.print("--saved");
         } catch(Exception e){
             System.out.print("Pas Sauvegardé  "+e.getMessage());
         }
