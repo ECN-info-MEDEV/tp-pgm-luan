@@ -95,8 +95,19 @@ public class GUI extends javax.swing.JFrame {
             }
          });
         });
+        JButton generateBinarieImage = new JButton("Generate BinarieImage");
+        SwingUtilities.invokeLater(() -> {
+            generateBinarieImage.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    pmgReader.transformMatriz(125);
+                    pmgReader.saveImage();
+                }
+            }
+         );
+        });
        jPanel1.add(compareButton);
        jPanel1.add(saveButton);
+       jPanel1.add(generateBinarieImage);
        jPanel1.revalidate();
        jPanel1.repaint();
     }
