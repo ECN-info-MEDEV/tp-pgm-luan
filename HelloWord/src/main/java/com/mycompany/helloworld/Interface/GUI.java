@@ -28,6 +28,7 @@ public class GUI extends javax.swing.JFrame {
 
         // Asegúrate de llamar a revalidate() y repaint() para actualizar la interfaz gráfica
         PmgReader pmgReader = new PmgReader();
+        PmgReader pmgReaderCompair = new PmgReader();
         JButton selectFileButton = new JButton("Seleccionar archivo PGM");
         selectFileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -68,6 +69,33 @@ public class GUI extends javax.swing.JFrame {
             }
          });
         });
+        JButton compareButton = new JButton("Comparer avecc image");
+        SwingUtilities.invokeLater(() -> {
+        compareButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+              System.out.println("listened to comparer");
+                              // Crear un JFileChooser
+                JFileChooser fileChooser = new JFileChooser();
+
+                // Configurar el JFileChooser para seleccionar solo archivos PGM
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos PGM", "pgm"));
+
+                // Mostrar el selector de archivos y obtener la respuesta del usuario
+                int result = fileChooser.showOpenDialog(GUI.this);
+
+                // Comprobar si el usuario seleccionó un archivo
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    // Obtener el archivo seleccionado
+                    File selectedFile = fileChooser.getSelectedFile();
+                    
+                    pmgReaderCompair.pmgread(selectedFile.getAbsolutePath());
+                    boolean sameImage = pmgReader.verifySameImage(pmgReaderCompair.getImg());
+                    System.out.print("Are the images the same? "+  String.valueOf(sameImage));
+                }      
+            }
+         });
+        });
+       jPanel1.add(compareButton);
        jPanel1.add(saveButton);
        jPanel1.revalidate();
        jPanel1.repaint();
