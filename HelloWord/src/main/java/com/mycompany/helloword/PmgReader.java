@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.helloword;
+
 import java.awt.BorderLayout;
 import java.io.*;
 import java.util.HashMap;
@@ -13,12 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+
 /**
  *
  * @author hudsonteixeira
  */
 
 public class PmgReader {
+
     private int[][] img;
     private int picWidth;
     private int picHeight;
@@ -32,8 +35,8 @@ public class PmgReader {
         this.graphSaved = graphSaved;
     }
 
-    public void pmgread(String filePath){
-        try{
+    public void pmgread(String filePath) {
+        try {
             InputStream fileInputStream = new FileInputStream(filePath);
             Scanner scan = new Scanner(fileInputStream);
             // Discard the magic number
@@ -48,21 +51,20 @@ public class PmgReader {
             System.out.println("picWidth: " + picHeight);
             System.out.println("maxvalue: " + maxvalue);
 
+            // read the image data
+            img = new int[picHeight][picWidth];
+            for (int row = 0; row < picHeight; row++) {
+                for (int col = 0; col < picWidth; col++) {
+                    img[row][col] = scan.nextInt();
+                }
 
-             // read the image data
-             img = new int[picHeight][picWidth];
-             for (int row = 0; row < picHeight; row++) {
-                 for (int col = 0; col < picWidth; col++) {
-                     img[row][col] = scan.nextInt();
-                 }
-                 
-             }
-             
-        } catch (Exception e) {    
+            }
+
+        } catch (Exception e) {
             System.out.println("error ");
         }
     }
-    
+
     public void histogramme(JPanel panel) {
         Map<Integer, Integer> mapHistory = new HashMap<>();
         for (int i = 0; i <= 255; i++) {
@@ -78,17 +80,30 @@ public class PmgReader {
 
         for (Map.Entry<Integer, Integer> entry : mapHistory.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
-         }
+        }
 
         panel.setLayout(new BorderLayout());
         Graph graph = new Graph(mapHistory);
         panel.add(new JScrollPane(graph)); // Suponiendo que Graph recibe el mapa y muestra el histograma
-       // Ajustar el tamaño del frame automáticamente// Definir acción al cerrar la ventana
+        // Ajustar el tamaño del frame automáticamente// Definir acción al cerrar la ventana
         panel.setVisible(true);
         SwingUtilities.invokeLater(() -> {
             this.graphSaved = graph;
         });
     }
-    
-}
 
+    //seuillage
+    public static int[][] transformMatriz(int[][] matriz, int x) { 
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if (matriz[i][j] < x) {
+                    matriz[i][j] = 0;
+                } else if (matriz[i][j] > x) {
+                    matriz[i][j] = 1;
+                }
+            }
+        }
+        return matriz;
+    }
+
+}
